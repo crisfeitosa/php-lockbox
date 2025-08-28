@@ -27,6 +27,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 };
 
-header("Location: /login");
-
+view('register');
 exit();
