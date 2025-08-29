@@ -26,6 +26,7 @@
                 type="text"
                 name="email"
                 class="input input-bordered w-full max-w-xs bg-gray-100"
+                value="<?= old('email') ?>"
                 placeholder="Digite seu email"
               />
 

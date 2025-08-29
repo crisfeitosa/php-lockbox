@@ -46,3 +46,13 @@ function auth() {
 
     return $_SESSION['auth'];
 }
+
+function old($field) {
+    $post = $_POST;
+
+    if (isset($post[$field])) {
+        return $post[$field];
+    }
+
+    return '';
+}

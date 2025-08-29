@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ], $_POST);
 
     if ($validation->notValid()) {
-        header("Location: /login");
+        view('login');
         exit();
     }
 
