@@ -12,6 +12,8 @@
   <div class="bg-white hero mr-40 min-h-screen text-black">
     <div class="hero-content my-auto">
       <form method="POST" action="/login">
+        <?php $validations = flash()->get('validations'); ?>
+
         <div class="card">
           <div class="card-body">
             <div class="card-title">Faça o seu login</div>
@@ -20,7 +22,16 @@
                 <span class="label-text text-black">Email</span>
               </div>
 
-              <input type="text" class="input input-bordered w-full max-w-xs bg-gray-100" placeholder="Digite seu email" />
+              <input
+                type="text"
+                name="email"
+                class="input input-bordered w-full max-w-xs bg-gray-100"
+                placeholder="Digite seu email"
+              />
+
+              <?php if (isset($validations['email'])): ?>
+                <div class="mt-1 text-xs text-error"><?= $validations['email'][0] ?></div>
+              <?php endif; ?>
             </label>
 
             <label class="form-control">
@@ -28,7 +39,16 @@
                 <span class="label-text text-black">Senha</span>
               </div>
 
-              <input type="password" class="input input-bordered w-full max-w-xs bg-gray-100" placeholder="Digite sua senha" />
+              <input
+                type="password"
+                name="password"
+                class="input input-bordered w-full max-w-xs bg-gray-100"
+                placeholder="Digite sua senha"
+              />
+
+              <?php if (isset($validations['password'])): ?>
+                <div class="mt-1 text-xs text-error"><?= $validations['password'][0] ?></div>
+              <?php endif; ?>
             </label>
 
             <div class="card-actions mt-4">

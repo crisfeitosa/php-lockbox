@@ -31,19 +31,19 @@ class Validation {
 
     private function required($field, $value) {
         if(strlen($value) == 0) {
-            $this->validations[] = "O $field é obrigatório.";
+            $this->addError($field, "O $field é obrigatório.");
         }
     }
 
     private function email($field, $value) {
         if(! filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            $this->validations[] = "O $field é inválido.";
+            $this->addError($field, "O $field é inválido.");
         }
     }
 
     private function confirmed($field, $value, $valueConfirmed) {
         if ($value != $valueConfirmed) {
-            $this->validations[] = "O $field de confirmação está diferente.";
+            $this->addError($field, "O $field de confirmação está diferente.");
         }
     }
 
@@ -60,28 +60,32 @@ class Validation {
         )->fetch();
 
         if ($result) {
-            $this->validations[] = "O $value já está sendo usado.";
+            $this->addError($field, "O $field já está sendo usado.");
         }
     }
 
     private function min($min, $field, $value) {
         if (strlen($value) <= $min) {
-            $this->validations[] = "O $field precisa ter um mínimo de $min caracteres.";
+            $this->addError($field, "O $field precisa ter um mínimo de $min caracteres.");
         }
     }
 
     private function max($max, $field, $value) {
         if (strlen($value) > $max) {
-            $this->validations[] = "O $field precisa ter um máximo de $max caracteres.";
+            $this->addError($field, "O $field precisa ter um máximo de $max caracteres.");
         }
     }
 
     private function strong($field, $value) {
         if (! strpbrk($value, "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~")) {
-            $this->validations[] = "A $field precisa ter ao menos um caractere especial nela.";
+            $this->addError($field, "A $field precisa um caractere especial nela.");
         }
     }
 
+    private function addError($field, $erro) {
+        $this->validations[$field][] = $erro;
+    }
+ 
     public function notValid($nameCustom = null) {
         $key = 'validations';
 

@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'password' => ['required']
     ], $_POST);
 
-    if ($validation->notValid('login')) {
+    if ($validation->notValid()) {
         header("Location: /login");
         exit();
     }
