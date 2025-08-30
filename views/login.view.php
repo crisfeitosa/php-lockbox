@@ -25,7 +25,7 @@
               <input
                 type="text"
                 name="email"
-                class="input input-bordered w-full max-w-xs bg-gray-100"
+                class="input w-full max-w-xs bg-gray-100"
                 value="<?= old('email') ?>"
                 placeholder="Digite seu email"
               />
@@ -43,7 +43,7 @@
               <input
                 type="password"
                 name="password"
-                class="input input-bordered w-full max-w-xs bg-gray-100"
+                class="input w-full max-w-xs bg-gray-100"
                 placeholder="Digite sua senha"
               />
 

@@ -20,23 +20,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         params: compact('email')
     )->fetch();
 
-    if ($user) {
-        $passwordPost = $_POST['password'];
-        $passwordDB = $user->password;
-
-        if (! password_verify($passwordPost, $passwordDB)) {
-            flash()->push('validations_login', ['Usuário ou senha estão incorretos!']);
-
-            header('Location: /login');
-            exit();
-        }
-
+    if ($user && password_verify($_POST['password'], $user->password)) {
         $_SESSION['auth'] = $user;
 
         flash()->push('message', "Seja bem-vindo " . $user->name . "!");
 
         header("Location: /");
         exit();
+    } else {
+        flash()->push('validations', ['email' => ['Usuário ou senha estão incorretos!']]);
     }
 }
 

@@ -20,7 +20,7 @@
                 <span class="label-text text-black">Nome</span>
               </div>
 
-              <input type="text" class="input input-bordered w-full max-w-xs bg-gray-100" placeholder="Digite seu nome" />
+              <input type="text" class="input w-full max-w-xs bg-gray-100" placeholder="Digite seu nome" />
             </label>
 
             <label class="form-control mb-2">
@@ -28,7 +28,7 @@
                 <span class="label-text text-black">E-mail</span>
               </div>
 
-              <input type="text" class="input input-bordered w-full max-w-xs bg-gray-100" placeholder="Digite seu email" />
+              <input type="text" class="input w-full max-w-xs bg-gray-100" placeholder="Digite seu email" />
             </label>
 
             <label class="form-control mb-2">
@@ -36,7 +36,7 @@
                 <span class="label-text text-black">Confirme seu Email</span>
               </div>
 
-              <input type="text" class="input input-bordered w-full max-w-xs bg-gray-100" placeholder="Confirme seu email" />
+              <input type="text" class="input w-full max-w-xs bg-gray-100" placeholder="Confirme seu email" />
             </label>
 
             <label class="form-control">
@@ -44,7 +44,7 @@
                 <span class="label-text text-black">Senha</span>
               </div>
 
-              <input type="password" class="input input-bordered w-full max-w-xs bg-gray-100" placeholder="Digite sua senha" />
+              <input type="password" class="input w-full max-w-xs bg-gray-100" placeholder="Digite sua senha" />
             </label>
 
             <div class="card-actions mt-4">
