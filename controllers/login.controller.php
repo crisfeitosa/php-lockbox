@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         flash()->push('message', "Seja bem-vindo " . $user->name . "!");
 
-        header("Location: /");
+        header("Location: /dashboard");
         exit();
     } else {
         flash()->push('validations', ['email' => ['Usuário ou senha estão incorretos!']]);

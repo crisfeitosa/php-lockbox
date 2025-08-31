@@ -65,7 +65,7 @@ class Validation {
     }
 
     private function min($min, $field, $value) {
-        if (strlen($value) <= $min) {
+        if (strlen($value) < $min) {
             $this->addError($field, "O $field precisa ter um mínimo de $min caracteres.");
         }
     }

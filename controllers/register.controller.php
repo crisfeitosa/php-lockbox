@@ -7,8 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'password' => ['required', 'min:8', 'max:30', 'strong']
     ], $_POST);
 
-    if ($validation->notValid('register')) {
-        header("Location: /login");
+    if ($validation->notValid()) {
+        view('register');
         exit();
     }
 

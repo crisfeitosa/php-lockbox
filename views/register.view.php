@@ -1,3 +1,5 @@
+<?php $validations = flash()->get('validations'); ?>
+
 <div class="grid grid-cols-2">
   <div class="hero min-h-screen flex mx-auto">
     <div class="hero-content m-auto py-8">
@@ -20,7 +22,17 @@
                 <span class="label-text text-black">Nome</span>
               </div>
 
-              <input type="text" class="input w-full max-w-xs bg-gray-100" placeholder="Digite seu nome" />
+              <input
+                type="text"
+                name="name"
+                class="input w-full max-w-xs bg-gray-100"
+                placeholder="Digite seu nome"
+                value="<?= old('name') ?>"
+              />
+
+              <?php if (isset($validations['name'])): ?>
+                <div class="mt-1 text-xs text-error"><?= $validations['name'][0] ?></div>
+              <?php endif; ?>
             </label>
 
             <label class="form-control mb-2">
@@ -28,7 +40,17 @@
                 <span class="label-text text-black">E-mail</span>
               </div>
 
-              <input type="text" class="input w-full max-w-xs bg-gray-100" placeholder="Digite seu email" />
+              <input
+                type="text"
+                name="email"
+                class="input w-full max-w-xs bg-gray-100"
+                value="<?= old('email') ?>" 
+                placeholder="Digite seu email"
+              />
+
+              <?php if (isset($validations['email'])): ?>
+                <div class="mt-1 text-xs text-error"><?= $validations['email'][0] ?></div>
+              <?php endif; ?>
             </label>
 
             <label class="form-control mb-2">
@@ -36,7 +58,12 @@
                 <span class="label-text text-black">Confirme seu Email</span>
               </div>
 
-              <input type="text" class="input w-full max-w-xs bg-gray-100" placeholder="Confirme seu email" />
+              <input
+                type="text"
+                name="email_confirmation" 
+                class="input w-full max-w-xs bg-gray-100"
+                placeholder="Confirme seu email"
+              />
             </label>
 
             <label class="form-control">
@@ -44,7 +71,16 @@
                 <span class="label-text text-black">Senha</span>
               </div>
 
-              <input type="password" class="input w-full max-w-xs bg-gray-100" placeholder="Digite sua senha" />
+              <input
+                type="password"
+                name="password" 
+                class="input w-full max-w-xs bg-gray-100"
+                placeholder="Digite sua senha"
+              />
+
+              <?php if (isset($validations['password'])): ?>
+                <div class="mt-1 text-xs text-error"><?= $validations['password'][0] ?></div>
+              <?php endif; ?>
             </label>
 
             <div class="card-actions mt-4">
