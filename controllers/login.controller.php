@@ -1,6 +1,13 @@
 <?php
 
+use Core\Database;
+use Core\Validation;
+
+use App\Models\User;
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $database = new Database(config('database'));
+
     $email = $_POST['email'];
     $password = $_POST['password'];
 

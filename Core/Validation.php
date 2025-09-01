@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class Validation {
     public $validations = [];
 

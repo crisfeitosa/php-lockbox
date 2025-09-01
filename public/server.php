@@ -2,4 +2,4 @@
 
 $_SERVER["HOMEPATH"]="~";
 
-?>
+$config = require '../config.php';

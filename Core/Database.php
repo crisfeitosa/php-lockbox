@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use PDO;
+
 class Database {
     private $db;
 
@@ -34,5 +38,3 @@ class Database {
     }
 
 }
-
-$database = new Database($config['database']);
