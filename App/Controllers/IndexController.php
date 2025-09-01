@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
 class IndexController {
   public function __invoke() {
-    echo "indexcontroller -- Invoke";
+    echo "IndexController.__invoke";
   }
 }

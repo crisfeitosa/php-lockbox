@@ -1,8 +1,8 @@
 <?php
 
 use Core\Route;
-use App\Controller\IndexController;
-use App\Controller\LoginController;
+use App\Controllers\IndexController;
+use App\Controllers\LoginController;
 
 (new Route())
   ->get('/', IndexController::class)

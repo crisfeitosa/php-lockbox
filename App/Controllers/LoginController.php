@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
 class LoginController {
   public function index() {
-    echo "Login Controller Index";
+    echo "LoginController.index";
   }
 
   public function login() {
-    echo "Login Controller Login";
+    echo "LoginController.login";
   }
 }
