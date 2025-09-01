@@ -4,6 +4,10 @@ function base_path($path) {
     return __DIR__ . "/../" . $path;
 }
 
+function redirect($uri) {
+    return header('Location: ' . $uri);
+}
+
 function view($view, $data = []) {
     foreach($data as $key => $value) {
         $$key = $value;
