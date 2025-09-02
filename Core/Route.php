@@ -8,7 +8,7 @@ class Route {
   public function addRoute($httpMethod, $uri, $controller) {
     if (is_string($controller)) {
       $data = [
-        'controller' => $controller,
+        'class' => $controller,
         'method' => '__invoke'
       ];
     }

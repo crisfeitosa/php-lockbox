@@ -38,7 +38,7 @@ function flash() {
 }
 
 function config($key = null) {
-    $config = require base_path('config.php');
+    $config = require base_path('/config/config.php');
 
     if (strlen($key) > 0) {
         return $config[$key];
