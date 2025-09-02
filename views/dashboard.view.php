@@ -1,4 +1,4 @@
-<div class="mx-auto mx-auto max-w-screen-lg">
+<div class="mx-auto max-w-screen-lg h-screen flex flex-col">
   <div class="navbar bg-base-100">
     <div class="flex-1">
       <a class="btn btn-ghost text-xl">LockBox</a>
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="flex space-x-4 w-full px-4">
+  <div class="flex space-x-4 px-4">
     <form class="w-full">
       <label class="input input-bordered flex items-center gap-2 w-full">
         <input type="text" class="grow" name="pesquisar" placeholder="Pesquisar notas no LockBox..." />
@@ -39,12 +39,25 @@
     <a href="#" class="btn btn-primary">+ item</a>
   </div>
 
-  <div class="h-svh flex py-6 px-4">
+  <div class="flex flex-grow py-6 px-4">
     <div class="bg-base-300 rounded-l-box w-56">
     </div>
 
-    <div class="bg-base-200 rounded-r-box w-full p-10">
-      form
+    <div class="bg-base-200 rounded-r-box w-full p-10 flex flex-col space-y-6">
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Título</legend>
+        <input type="text" class="input w-full" placeholder="Type here" />
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend class="fieldset-legend">Sua nota</legend>
+        <textarea class="textarea h-24 w-full" placeholder="Bio"></textarea>
+      </fieldset>
+
+      <div class="flex justify-between items-center">
+        <button class="btn btn-error">Deletar</button>
+        <button class="btn btn-primary">Atualizar</button>
+      </div>
     </div>
   </div>
 </div>
