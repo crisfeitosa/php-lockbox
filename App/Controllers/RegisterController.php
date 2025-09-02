@@ -7,7 +7,7 @@ use Core\Validation;
 
 class RegisterController {
   public function index() {
-    return view('register');
+    return view('register', template: 'guest');
   }
 
   public function register() {
@@ -18,7 +18,7 @@ class RegisterController {
     ], $_POST);
 
     if ($validation->notValid()) {
-      return view('register');
+      return view('register', template: 'guest');
     }
 
     $database = new Database(config('database'));

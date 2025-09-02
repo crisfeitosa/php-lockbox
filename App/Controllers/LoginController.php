@@ -8,7 +8,7 @@ use Core\Validation;
 
 class LoginController {
   public function index() {
-    return view('login');
+    return view('login', template: 'guest');
   }
 
   public function login() {
@@ -21,7 +21,7 @@ class LoginController {
     ], $_POST);
 
     if ($validation->notValid()) {
-      return view('login');
+      return view('login', template: 'guest');
     }
 
     $database = new Database(config('database'));
@@ -35,7 +35,7 @@ class LoginController {
     if (! ($user && password_verify($_POST['password'], $user->password)) ) {
       flash()->push('validations', ['email' => ['Usuário ou senha estão incorretos!']]);
 
-      return view('login');
+      return view('login', template: 'guest');
     }
 
     $_SESSION['auth'] = $user;

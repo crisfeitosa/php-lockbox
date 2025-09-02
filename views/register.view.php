@@ -16,7 +16,7 @@
       <form method="POST" action="/register">
         <div class="card">
           <div class="card-body">
-            <div class="card-title">Crie a sua conta</div>
+            <div class="card-title text-xl">Crie a sua conta</div>
             <label class="form-control mb-2">
               <div class="label">
                 <span class="label-text text-black">Nome</span>
