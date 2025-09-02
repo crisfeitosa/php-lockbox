@@ -8,7 +8,7 @@
         <li><a>👁️</a></li>
         <li>
           <details>
-            <summary><?= $user->name ?></summary>
+            <summary><?= auth()->name ?></summary>
             <ul class="bg-base-100 rounded-t-none p-2">
               <li><a href="/logout">Logout</a></li>
             </ul>
