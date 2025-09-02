@@ -38,4 +38,13 @@
 
     <a href="#" class="btn btn-primary">+ item</a>
   </div>
+
+  <div class="h-svh flex py-6 px-4">
+    <div class="bg-base-300 rounded-l-box w-56">
+    </div>
+
+    <div class="bg-base-200 rounded-r-box w-full p-10">
+      form
+    </div>
+  </div>
 </div>
