@@ -42,6 +42,6 @@ class LoginController {
 
     flash()->push('message', "Seja bem-vindo " . $user->name . "!");
 
-    return redirect('/dashboard');
+    return redirect('/notes');
   }
 }

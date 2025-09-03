@@ -1,26 +1,28 @@
 <?php
 
 use Core\Route;
-use App\Controllers\DashboardController;
+
 use App\Controllers\IndexController;
 use App\Controllers\LoginController;
 use App\Controllers\LogoutController;
 use App\Controllers\RegisterController;
 use App\Controllers\Notes;
 
+use App\Middlewares\AuthMiddleware;
+use App\Middlewares\GuestMiddleware;
+
 (new Route())
-  ->get('/', IndexController::class)
+  // Não autenticado ->
+  ->get('/', IndexController::class, GuestMiddleware::class)
+  ->get('/login', [LoginController::class, 'index'], GuestMiddleware::class)
+  ->post('/login', [LoginController::class, 'login'], GuestMiddleware::class)
+  ->get('/register', [RegisterController::class, 'index'], GuestMiddleware::class)
+  ->post('/register', [RegisterController::class, 'register'], GuestMiddleware::class)
 
-  ->get('/login', [LoginController::class, 'index'])
-  ->post('/login', [LoginController::class, 'login'])
-
-  ->get('/dashboard', DashboardController::class)
-  ->get('/notes/create', [Notes\CreateController ::class, 'index'])
-  ->post('/notes/create', [Notes\CreateController ::class, 'store'])
-
-  ->get('/logout', LogoutController::class)
-
-  ->get('/register', [RegisterController::class, 'index'])
-  ->post('/register', [RegisterController::class, 'register'])
+  // Autenticado ->
+  ->get('/logout', LogoutController::class, AuthMiddleware::class)
+  ->get('/notes', Notes\IndexController::class, AuthMiddleware::class)
+  ->get('/notes/create', [Notes\CreateController ::class, 'index'], AuthMiddleware::class)
+  ->post('/notes/create', [Notes\CreateController ::class, 'store'], AuthMiddleware::class)
 
 ->run();

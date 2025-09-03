@@ -1,14 +1,14 @@
 <?php 
 
-namespace App\Controllers;
+namespace App\Controllers\Notes;
 
-class DashboardController {
+class IndexController {
   public function __invoke() {
     if (! auth()) {
       return redirect('/login');
     }
 
-    return view('dashboard', [
+    return view('notes', [
       'user' => auth()
     ]);
   }
