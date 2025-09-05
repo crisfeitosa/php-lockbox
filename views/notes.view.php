@@ -1,6 +1,6 @@
 <div class="bg-base-300 rounded-l-box w-56 flex flex-col divide-y divide-gray-700 overflow-hidden">
   <?php foreach($notes as $note): ?>
-    <a href="/notes?id=<?=$note->id?>"
+    <a href="/notes?id=<?=$note->id?><?= isset($_GET['search']) ? '&search=' . $_GET['search'] : '' ?>"
       class="
         w-full p-2 cursor-pointer hover:bg-base-200
         <?php if ($note->id == $noteSelected->id): ?> bg-base-200 <?php endif; ?>

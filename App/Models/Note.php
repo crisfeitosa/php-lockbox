@@ -12,15 +12,15 @@ class Note {
   public $created_at;
   public $updated_at;
 
-  public static function all() {
+  public static function all($search = null) {
     $db = new Database(config('database'));
 
     return $db->query(
-      query: "select * from notes where user_id = :user_id",
+      query: "select * from notes where user_id = :user_id " . (
+        $search ? "and title like :search" : null
+      ),
       class: self::class,
-      params: [
-        'user_id' => auth()->id
-      ]
+      params: array_merge(['user_id' => auth()->id], $search ? ['search' => "%$search%"] : [])
     )->fetchAll();
   }
 }
