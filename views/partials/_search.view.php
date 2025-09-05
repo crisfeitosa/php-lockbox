@@ -1,4 +1,4 @@
-<div class="flex space-x-4 px-4">
+<div class="flex space-x-4">
   <form action="/notes" class="w-full">
     <label class="input input-bordered flex items-center gap-2 w-full">
       <input type="text" class="grow" name="search" placeholder="Pesquisar notas no LockBox..." />
