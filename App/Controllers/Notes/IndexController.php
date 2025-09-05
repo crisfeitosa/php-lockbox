@@ -6,17 +6,11 @@ use App\Models\Note;
 
 class IndexController {
   public function __invoke() {
-    $search = isset($_GET['search']) ? $_GET['search'] : null;
+    $notes = Note::all(
+      request()->get('search')
+    );
 
-    $notes = Note::all($search);
-
-    $id = isset($_GET['id']) ? $_GET['id'] : ( sizeof($notes) > 0 ? $notes[0]->id : null);
-
-    $filter = array_filter($notes, fn($n) => $n->id == $id);
-
-    $noteSelected = array_pop($filter);
-
-    if (!$noteSelected) {
+    if (!$noteSelected = $this->getNoteSelected($notes)) {
       return view('notes/not-found');
     }
 
@@ -24,5 +18,12 @@ class IndexController {
       'notes' => $notes,
       'noteSelected' => $noteSelected
     ]);
+  }
+
+  private function getNoteSelected($notes) {
+    $id = request()->get('id', ( sizeof($notes) > 0 ? $notes[0]->id : null));
+    $filter = array_filter($notes, fn($n) => $n->id == $id);
+
+    return array_pop($filter);
   }
 }
