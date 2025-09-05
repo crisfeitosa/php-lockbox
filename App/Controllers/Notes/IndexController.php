@@ -2,14 +2,21 @@
 
 namespace App\Controllers\Notes;
 
+use App\Models\Note;
+
 class IndexController {
   public function __invoke() {
-    if (! auth()) {
-      return redirect('/login');
-    }
+    $notes = Note::all();
+
+    $id = isset($_GET['id']) ? $_GET['id'] : $notes[0]->id;
+
+    $filter = array_filter($notes, fn($n) => $n->id == $id);
+
+    $noteSelected = array_pop($filter);
 
     return view('notes', [
-      'user' => auth()
+      'notes' => $notes,
+      'noteSelected' => $noteSelected
     ]);
   }
 }
