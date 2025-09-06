@@ -14,7 +14,7 @@ class IndexController {
       return view('notes/not-found');
     }
 
-    return view('notes', [
+    return view('notes/index', [
       'notes' => $notes,
       'noteSelected' => $noteSelected
     ]);
