@@ -12,6 +12,14 @@ class Note {
   public $created_at;
   public $updated_at;
 
+  public function note() {
+    if (session()->get('show')) {
+      return $this->note;
+    }
+
+    return str_repeat('*', rand(10, 100));
+  }
+
   public static function all($search = null) {
     $db = new Database(config('database'));
 
@@ -27,18 +35,25 @@ class Note {
   public static function update($id, $title, $note) {
     $db = new Database(config('database'));
 
+    $set = "title = :title";
+
+    if ($note) {
+      $set .= ", note = :note";
+    }
+
     $db->query(
       query: "
         update notes
-        set title = :title
-        , note = :note
+        set $set
         where id = :id
       ",
-      params: [
-        'id' => $id,
-        'title' => $title,
-        'note' => $note
-      ]
+      params: array_merge(
+        [
+          'title' => $title,
+          'id' => $id
+        ],
+        $note ? ['note' => $note] : []
+      )
     );
   }
 

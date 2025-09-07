@@ -8,11 +8,13 @@ use Core\Validation;
 
 class UpdateController {
   public function __invoke() {
-    $validation = Validation::validate([
-      'title' => ['required', 'min:3', 'max:255'],
-      'note' => ['required'],
-      'id' => ['required']
-    ], request()->all());
+    $validation = Validation::validate(array_merge(
+      [
+        'title' => ['required', 'min:3', 'max:255'],
+        'id' => ['required']
+      ],
+      session()->get('show') ? ['note' => ['required']] : []
+    ), request()->all());
 
     if ($validation->notValid()) {
       return redirect('/notes?id=' . request()->post('id'));
