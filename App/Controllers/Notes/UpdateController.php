@@ -18,20 +18,10 @@ class UpdateController {
       return redirect('/notes?id=' . request()->post('id'));
     }
 
-    $db = new Database(config('database'));
-
-    $db->query(
-      query: "
-        update notes
-        set title = :title
-        , note = :note
-        where id = :id
-      ",
-      params: [
-        'title' => request()->post('title'),
-        'note' => request()->post('note'),
-        'id' => request()->post('id')
-      ]
+    Note::update(
+      request()->post('id'),
+      request()->post('title'),
+      request()->post('note')
     );
 
     flash()->push('message', 'Registro atualizado com sucesso!!');

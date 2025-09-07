@@ -23,4 +23,36 @@ class Note {
       params: array_merge(['user_id' => auth()->id], $search ? ['search' => "%$search%"] : [])
     )->fetchAll();
   }
+
+  public static function update($id, $title, $note) {
+    $db = new Database(config('database'));
+
+    $db->query(
+      query: "
+        update notes
+        set title = :title
+        , note = :note
+        where id = :id
+      ",
+      params: [
+        'id' => $id,
+        'title' => $title,
+        'note' => $note
+      ]
+    );
+  }
+
+  public static function delete($id) {
+    $db = new Database(config('database'));
+
+    $db->query(
+      query: "
+        delete from notes
+        where id = :id
+      ",
+      params: [
+        'id' => $id
+      ]
+    );
+  }
 }

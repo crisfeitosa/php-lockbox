@@ -34,7 +34,14 @@
   </form>
 
   <div class="flex justify-between items-center">
-    <button class="btn btn-error">Deletar</button>
+    <form action="/note" method="POST">
+      <input type="hidden" name="__method" value="DELETE" />
+
+      <input type="hidden" name="id" value="<?= $noteSelected->id ?>"/>
+
+      <button class="btn btn-error" type="submit">Deletar</button>
+    </form>
+
     <button class="btn btn-primary" type="submit" form="form-update">Atualizar</button>
   </div>
 </div>

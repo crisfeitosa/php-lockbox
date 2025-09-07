@@ -21,10 +21,12 @@ use App\Middlewares\GuestMiddleware;
 
   // Autenticado ->
   ->get('/logout', LogoutController::class, AuthMiddleware::class)
+
   ->get('/notes', Notes\IndexController::class, AuthMiddleware::class)
   ->get('/notes/create', [Notes\CreateController ::class, 'index'], AuthMiddleware::class)
   ->post('/notes/create', [Notes\CreateController ::class, 'store'], AuthMiddleware::class)
 
   ->put('/note', Notes\UpdateController::class, AuthMiddleware::class)
+  ->delete('/note', Notes\DeleteController::class, AuthMiddleware::class)
 
 ->run();
