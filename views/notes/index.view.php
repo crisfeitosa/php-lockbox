@@ -29,7 +29,7 @@
 
     <fieldset class="fieldset">
       <legend class="fieldset-legend">Sua nota</legend>
-      <textarea name="note" class="textarea h-24 w-full" placeholder="Bio"><?=$noteSelected->note?></textarea>
+      <textarea name="note" class="textarea h-24 w-full" placeholder="Escreva aqui..."><?=$noteSelected->note?></textarea>
     </fieldset>
   </form>
 
