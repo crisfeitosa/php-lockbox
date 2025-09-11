@@ -14,10 +14,10 @@ class Note {
 
   public function note() {
     if (session()->get('show')) {
-      return $this->note;
+      return decrypt($this->note);
     }
 
-    return str_repeat('*', rand(10, 100));
+    return str_repeat('*', strlen($this->note));
   }
 
   public static function all($search = null) {
@@ -30,6 +30,25 @@ class Note {
       class: self::class,
       params: array_merge(['user_id' => auth()->id], $search ? ['search' => "%$search%"] : [])
     )->fetchAll();
+  }
+
+  public static function create($data) {
+    $database = new Database(config('database'));
+
+    $database->query(
+      query: "insert into notes (user_id, title, note, created_at, updated_at)
+        values (
+          :user_id,
+          :title,
+          :note,
+          :created_at,
+          :updated_at
+        )",
+      params: array_merge($data, [
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s'),
+      ])
+    );
   }
 
   public static function update($id, $title, $note) {
@@ -52,7 +71,7 @@ class Note {
           'title' => $title,
           'id' => $id
         ],
-        $note ? ['note' => $note] : []
+        $note ? ['note' => encrypt($note)] : []
       )
     );
   }

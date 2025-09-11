@@ -4,6 +4,7 @@ namespace App\Controllers\Notes;
 
 use Core\Database;
 use Core\Validation;
+use App\Models\Note;
 
 class CreateController {
   public function index() {
@@ -14,33 +15,20 @@ class CreateController {
     $validation = Validation::validate([
       'title' => ['required', 'min:3', 'max:255'],
       'note' => ['required']
-    ], $_POST);
+    ], request()->all());
 
     if ($validation->notValid()) {
       return view('notes/create');
     }
 
-    $database = new Database(config('database'));
-
-    $database->query(
-      query: "insert into notes (user_id, title, note, created_at, updated_at)
-        values (
-          :user_id,
-          :title,
-          :note,
-          :created_at,
-          :updated_at
-        )",
-      params: [
-        'user_id' => auth()->id,
-        'title' => $_POST['title'],
-        'note' => $_POST['note'],
-        'created_at' => date('Y-m-d H:i:s'),
-        'updated_at' => date('Y-m-d H:i:s'),
-      ]
-    );
+    Note::create([
+      'user_id' => auth()->id,
+      'title' => request()->post('title'),
+      'note' => encrypt(request()->post('note')),
+    ]);
 
     flash()->push('message', 'Nota criada com sucesso!');
+
     return redirect('/notes');
   }
 }
