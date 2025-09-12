@@ -5,11 +5,11 @@
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
       <li>
-        <?php if (session()->get('show')): ?>
+        <?php if (session()->get('show')) { ?>
           <a href="/hide">🫣</a>
-        <?php else: ?>
+        <?php } else { ?>
           <a href="/confirm">👀</a>
-        <?php endif; ?>
+        <?php } ?>
       </li>
       <li>
         <details>

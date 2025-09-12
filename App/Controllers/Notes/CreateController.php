@@ -1,34 +1,38 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Controllers\Notes;
 
-use Core\Database;
-use Core\Validation;
 use App\Models\Note;
+use Core\Validation;
 
-class CreateController {
-  public function index() {
-    return view('notes/create');
-  }
-
-  public function store() {
-    $validation = Validation::validate([
-      'title' => ['required', 'min:3', 'max:255'],
-      'note' => ['required']
-    ], request()->all());
-
-    if ($validation->notValid()) {
-      return view('notes/create');
+class CreateController
+{
+    public function index()
+    {
+        return view('notes/create');
     }
 
-    Note::create([
-      'user_id' => auth()->id,
-      'title' => request()->post('title'),
-      'note' => encrypt(request()->post('note')),
-    ]);
+    public function store()
+    {
+        $validation = Validation::validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'note'  => ['required'],
+        ], request()->all());
 
-    flash()->push('message', 'Nota criada com sucesso!');
+        if ($validation->notValid()) {
+            return view('notes/create');
+        }
 
-    return redirect('/notes');
-  }
+        Note::create([
+            'user_id' => auth()->id,
+            'title'   => request()->post('title'),
+            'note'    => encrypt(request()->post('note')),
+        ]);
+
+        flash()->push('message', 'Nota criada com sucesso!');
+
+        return redirect('/notes');
+    }
 }

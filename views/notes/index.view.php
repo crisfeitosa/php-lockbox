@@ -2,18 +2,18 @@
 
 <div class="bg-base-300 rounded-l-box w-56 flex flex-col divide-y divide-gray-700 overflow-hidden">
 
-  <?php foreach($notes as $note): ?>
-    <a href="/notes?id=<?=$note->id?><?= request()->get('search', '', '&search=') ?>"
+  <?php foreach ($notes as $note) { ?>
+    <a href="/notes?id=<?= $note->id?><?= request()->get('search', '', '&search=') ?>"
       class="
         w-full p-2 cursor-pointer hover:bg-base-200
-        <?php if ($note->id == $noteSelected->id): ?> bg-base-200 <?php endif; ?>
+        <?php if ($note->id == $noteSelected->id) { ?> bg-base-200 <?php } ?>
       "
     >
-      <?=$note->title?> <br/>
+      <?= $note->title?> <br/>
             
-      <span class="text-xs">id: <?=$note->id?></span>
+      <span class="text-xs">id: <?= $note->id ?> ~ criado: <?= $note->createdAt()->locale('pt_BR')->diffForHumans() ?></span>
     </a>
-  <?php endforeach; ?>
+  <?php } ?>
 
 </div>
 
@@ -24,16 +24,16 @@
 
     <fieldset class="fieldset">
       <legend class="fieldset-legend">Título</legend>
-      <input value="<?=$noteSelected->title?>" name="title" type="text" class="input w-full" placeholder="Type here" />
+      <input value="<?= $noteSelected->title?>" name="title" type="text" class="input w-full" placeholder="Type here" />
     </fieldset>
 
     <fieldset class="fieldset">
       <legend class="fieldset-legend">Sua nota</legend>
       <textarea name="note"
-        <?php if (! session()->get('show')): ?>
+        <?php if (! session()->get('show')) { ?>
           disabled
-        <?php endif; ?>
-        class="textarea h-24 w-full" placeholder="Escreva aqui..."><?=$noteSelected->note()?></textarea>
+        <?php } ?>
+        class="textarea h-24 w-full" placeholder="Escreva aqui..."><?= $noteSelected->note()?></textarea>
     </fieldset>
   </form>
 

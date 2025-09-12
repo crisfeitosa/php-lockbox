@@ -1,17 +1,22 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core;
 
 use PDO;
 
-class Database {
+class Database
+{
     private $db;
 
-    public function __construct($config) {
+    public function __construct($config)
+    {
         $this->db = new PDO($this->getDsn($config));
     }
 
-    private function getDsn($config) {
+    private function getDsn($config)
+    {
         $driver = $config['driver'];
 
         unset($config['driver']);
@@ -25,7 +30,8 @@ class Database {
         return $dsn;
     }
 
-    public function query($query, $class = null, $params = []) {
+    public function query($query, $class = null, $params = [])
+    {
         $prepare = $this->db->prepare($query);
 
         if ($class) {
@@ -36,5 +42,4 @@ class Database {
 
         return $prepare;
     }
-
 }

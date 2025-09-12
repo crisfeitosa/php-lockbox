@@ -1,92 +1,116 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Models;
 
+use Carbon\Carbon;
 use Core\Database;
 
-class Note {
-  public $id;
-  public $user_id;
-  public $title;
-  public $note;
-  public $created_at;
-  public $updated_at;
+class Note
+{
+    public $id;
 
-  public function note() {
-    if (session()->get('show')) {
-      return decrypt($this->note);
+    public $user_id;
+
+    public $title;
+
+    public $note;
+
+    public $created_at;
+
+    public $updated_at;
+
+    public function createdAt()
+    {
+        return Carbon::parse($this->created_at);
     }
 
-    return str_repeat('*', strlen($this->note));
-  }
+    public function updatedAt()
+    {
+        return Carbon::parse($this->updated_at);
+    }
 
-  public static function all($search = null) {
-    $db = new Database(config('database'));
+    public function note()
+    {
+        if (session()->get('show')) {
+            return decrypt($this->note);
+        }
 
-    return $db->query(
-      query: "select * from notes where user_id = :user_id " . (
-        $search ? "and title like :search" : null
-      ),
-      class: self::class,
-      params: array_merge(['user_id' => auth()->id], $search ? ['search' => "%$search%"] : [])
-    )->fetchAll();
-  }
+        return str_repeat('*', strlen($this->note));
+    }
 
-  public static function create($data) {
-    $database = new Database(config('database'));
+    public static function all($search = null)
+    {
+        $db = new Database(config('database'));
 
-    $database->query(
-      query: "insert into notes (user_id, title, note, created_at, updated_at)
+        return $db->query(
+            query: 'select * from notes where user_id = :user_id ' . (
+                $search ? 'and title like :search' : null
+            ),
+            class: self::class,
+            params: array_merge(['user_id' => auth()->id], $search ? ['search' => "%$search%"] : [])
+        )->fetchAll();
+    }
+
+    public static function create($data)
+    {
+        $database = new Database(config('database'));
+
+        $database->query(
+            query: 'insert into notes (user_id, title, note, created_at, updated_at)
         values (
           :user_id,
           :title,
           :note,
           :created_at,
           :updated_at
-        )",
-      params: array_merge($data, [
-        'created_at' => date('Y-m-d H:i:s'),
-        'updated_at' => date('Y-m-d H:i:s'),
-      ])
-    );
-  }
-
-  public static function update($id, $title, $note) {
-    $db = new Database(config('database'));
-
-    $set = "title = :title";
-
-    if ($note) {
-      $set .= ", note = :note";
+        )',
+            params: array_merge($data, [
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ])
+        );
     }
 
-    $db->query(
-      query: "
+    public static function update($id, $title, $note)
+    {
+        $db = new Database(config('database'));
+
+        $set = 'title = :title';
+
+        if ($note) {
+            $set .= ', note = :note';
+        }
+
+        $db->query(
+            query: "
         update notes
         set $set
         where id = :id
       ",
-      params: array_merge(
-        [
-          'title' => $title,
-          'id' => $id
-        ],
-        $note ? ['note' => encrypt($note)] : []
-      )
-    );
-  }
+            params: array_merge(
+                [
+                    'title' => $title,
+                    'id'    => $id,
+                ],
+                $note ? ['note' => encrypt($note)] : []
+            )
+        );
+    }
 
-  public static function delete($id) {
-    $db = new Database(config('database'));
+    public static function delete($id)
+    {
+        $db = new Database(config('database'));
 
-    $db->query(
-      query: "
+        $db->query(
+            query: '
         delete from notes
         where id = :id
-      ",
-      params: [
-        'id' => $id
-      ]
-    );
-  }
+      ',
+            params: [
+                'id' => $id,
+            ]
+        );
+    }
 }

@@ -31,9 +31,9 @@
                 placeholder="Digite seu email"
               />
 
-              <?php if (isset($validations['email'])): ?>
+              <?php if (isset($validations['email'])) { ?>
                 <div class="mt-1 text-xs text-error"><?= $validations['email'][0] ?></div>
-              <?php endif; ?>
+              <?php } ?>
             </label>
 
             <label class="form-control">
@@ -48,9 +48,9 @@
                 placeholder="Digite sua senha"
               />
 
-              <?php if (isset($validations['password'])): ?>
+              <?php if (isset($validations['password'])) { ?>
                 <div class="mt-1 text-xs text-error"><?= $validations['password'][0] ?></div>
-              <?php endif; ?>
+              <?php } ?>
             </label>
 
             <div class="card-actions mt-4">

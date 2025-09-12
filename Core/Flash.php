@@ -1,13 +1,18 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Core;
 
-class Flash {
-    public function push($key, $value) {
+class Flash
+{
+    public function push($key, $value)
+    {
         $_SESSION["flash_$key"] = $value;
     }
 
-    public function get($key){
+    public function get($key)
+    {
         if (! isset($_SESSION["flash_$key"])) {
             return false;
         }
@@ -15,6 +20,7 @@ class Flash {
         $value = $_SESSION["flash_$key"];
 
         unset($_SESSION["flash_$key"]);
+
         return $value;
     }
 }
