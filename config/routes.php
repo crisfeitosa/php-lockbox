@@ -29,7 +29,8 @@ use App\Middlewares\GuestMiddleware;
   ->put('/note', Notes\UpdateController::class, AuthMiddleware::class)
   ->delete('/note', Notes\DeleteController::class, AuthMiddleware::class)
 
-  ->get('/show', [Notes\PreviewController::class, 'show'], AuthMiddleware::class)
+  ->get('/confirm', [Notes\PreviewController::class, 'confirm'], AuthMiddleware::class)
+  ->post('/show', [Notes\PreviewController::class, 'show'], AuthMiddleware::class)
   ->get('/hide', [Notes\PreviewController::class, 'hide'], AuthMiddleware::class)
 
 ->run();

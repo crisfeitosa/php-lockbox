@@ -1,9 +1,24 @@
 <?php
 
 namespace App\Controllers\Notes;
+use Core\Validation;
 
 class PreviewController {
   public function show() {
+    $validation = Validation::validate([
+      'password' => ['required']
+    ], request()->all());
+
+    if ($validation->notValid()) {
+      return view('notes/confirm');
+    }
+
+    if ( !(password_verify(request()->post('password'), auth()->password))) {
+      flash()->push('validations', ['password' => ['Senha incorreta!']]);
+
+      return view('notes/confirm');
+    }
+
     session()->set('show', true);
 
     return redirect('/notes');
@@ -13,5 +28,9 @@ class PreviewController {
     session()->forget('show');
 
     return redirect('/notes');
+  }
+
+  public function confirm() {
+    return view('/notes/confirm');
   }
 }

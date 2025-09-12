@@ -15,7 +15,7 @@ class RegisterController {
       'name' => ['required'],
       'email' => ['required', 'email', 'confirmed', 'unique:users'],
       'password' => ['required', 'min:8', 'max:30', 'strong']
-    ], $_POST);
+    ], request()->all());
 
     if ($validation->notValid()) {
       return view('register', template: 'guest');
@@ -26,9 +26,9 @@ class RegisterController {
     $database->query(
       query: "insert into users (name, email, password) values (:name, :email, :password)",
       params: [
-        'name' => $_POST['name'],
-        'email' => $_POST['email'],
-        'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+        'name' => request()->post('name'),
+        'email' => request()->post('email'),
+        'password' => password_hash(request()->post('password'), PASSWORD_DEFAULT)
       ]
     );
 
